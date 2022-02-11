@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:class_prop.properties"/>
+
+    <bean class="quoters.InjectRandomIntAnnotationBeanPostProcessor"/>
+    <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/> Без этого не заработает @PostConstruct -->
+    <!--Чтобы не запоминать все стандартные BeanPostProcessor их подключают сразу <context:annotation-config/> или <context:component-scan/>-->
+
+    <context:annotation-config/>
+
+    <bean class="quoters.ProfilingHandlerBeanPostProcessor"/>
+
+    <bean class="quoters.TerminatorQuoter" id="terminatorQuoter">
+        <property name="message" value="${TerminatorQuoter.message}"/>
+    </bean>
+
+</beans>
