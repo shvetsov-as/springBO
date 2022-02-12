@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import quoters.Quoter;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.Assert.assertEquals;
@@ -30,7 +32,8 @@ public class TerminatorTest {
 
     @Test
     public void sayTest() {
-        System.out.print("i'll be back");
+        context.getBean(Quoter.class).sayQuote();
+        //System.out.print("i'll be back");
         assertEquals("i'll be back", outContent.toString());
     }
 
